@@ -1,0 +1,270 @@
+v0.4.10, 10 November 2016
+Fixed Bugs:
+	1. Fixed issue in PlotDist that prevented plotting
+	RVs with numbers in the support that aren't standard
+	python types
+
+v0.4.9, 09 November 2016
+Fixed Bugs:
+        1. Fixed indexing problem in transform procedure
+	was previously ignoring some segments of the transform
+
+
+v0.4.8, 06 November 2016
+New Capabilities:
+
+Fixed Bugs:
+	1. Minor change to setup.py
+
+v0.4.7, 06 November 2016
+New Capabilities:
+
+Fixed Bugs:
+	1. Corrected Convolution function (accidentally broke it 
+		when [0,1] shortcut was implemented for convolution)
+	2. ArcTanRV was corrected
+
+v0.4.5, 22 October 2016
+New Capabilities:
+	1. Implemented shortcut for convolutions of two
+	random variables with [0,1] support
+
+Fixed Bug:
+	1. Removed pylab from the setup.py file. This is installed
+	with matplotlib
+	2. Fixed bug in posterior. Does integration directly instead
+	of through Truncate when the support of an RV has oo or -oo
+
+v0.4.4, 20 August 2016
+New Capabilities:
+	1. PlotLimits implemented to change the limits of a plot
+
+Fixed Bugs:
+	1. Fixed an issue in IDF where output wasn't returned
+		for continuous distributions
+
+v0.4.3, 19 July 2016
+New Capabilities:
+	1. X.save() method implemented to stored random variables
+		as binary
+	2. LoadRV() function implemented to load random variables
+		from binary
+
+v0.4.2, 12 June 2016
+
+New Capabilities:
+	1. New style plots
+
+Fixed Bugs:
+	1. Added code that allows users to specify variate 
+		in X.variate for NormalRV
+
+Other Comments:
+	1. Removed the plot.py file. Plotting no longer depends on it
+	2. setup.py file has been updated. pip install now downloads
+		all dependencies
+
+v0.4.1,
+
+New Capabilities:
+
+Fixed Bugs:
+	1. Imported atan function in dist_type to allow for proper
+		initialization of the ArcTanRV
+	2. Fixed Transform to work with float fractions in the
+		transformation
+	3. Fixed bug in Product that didn't allow for the use of
+		rational numbers as parameters
+	4. Fixed CDF and SF so that values passed outside of the
+		support are returned as 0 or 1 instead of returning
+		an error
+	5. If Convolution or Product cannot compute, APPLPy is now
+		programmed to try to reverse the order of the
+		calculation before returning and error
+	6. Assumptions added to the following some distributions to 
+		make computation of CDF more feasible
+	7. Truncate modified to divide by the correct normalizing
+		constant
+	8. SF discrete was modified the handle intermediate values
+	9. Added 'shortcut' for Weibull CDF
+
+v0.4.0, 17 APR 2016
+
+New Capabilities:
+	1. Discrete Time Markov Chains module
+	2. Improved method implmented for converting discrete RVs between
+		different functional forms. Now runs more efficiently
+	3. Discrete RVs with explicit values and discrete RVs defined by
+		expressions can now be manipulated with RV algebra
+	4. Sqrt(X) syntax implemented for transformation by sqrt(x).
+	5. X**n syntax implemented for transformations by x**n
+	6. Markov Chain class added, includes procedures for computing 
+		the state of a system after n additional steps
+	7. Support added for rational numbers in DiscreteUniformRV
+	8. Support for discrete random variables added for the Expected
+		 Value function
+	9. BernoulliRV type added
+	10. RangeStat procedure added for finding the range stastics for
+		a random variable
+	11. Maximum and Minimum IID now work with symbolic n unspecified
+	12. Random Variable method added to simplify functions with
+		assumptions
+	13. VerifyPDF(X) added for compatiblity with APPL
+
+Fixed Bugs:
+	1. BootstrapRV procedure fixed. Duplicate elements are now
+		eliminated from the support of Bootstrap RVs.
+	2. Pr(X) for elements in the BootstrapRV are now described by
+		rational numbers instead of floats.
+	3. Bug in transform for RV's with negative support is fixed.
+		Transform is now running properly for all supports.
+	4. Fixed bug in convolution for lifetime distributions. When
+		a floating point value was entered for a parameter,
+		the procedure would return 0 for the cdf of the convolution.
+		The procedure now works correctly.
+	5. Added assumptions to variables in product procedure. No longer
+		gives complex functions as output for products that occur in
+		the third quadrant.
+	6. Corrections made to transform for discrete random variables. No
+		longer cuts out parts of the distribution that are not in
+		the support of the tranformation, but simply does not 
+		transform them.
+	7. Corrections made to Transform to account for equality testing with
+		SymPy number types
+	8. Corrections made to the discrete transform procedure to handle
+		situations in which the support of the transformation does
+		not cover the full support of the random variable
+	9. Added simplification line to end of Truncate procedure
+	10. Fixed bug in computing values for discrete pdf
+	11. Fixed bug related to floating point numbers in transform
+	12. Fixed bug to correct computation of IDFs for Discrete RVs
+	13. OrderStat modified to allow for 'wo' for samples of size
+		greater than 4
+	14. Transform modified to accept symbolic discrete RVs
+	15. Convolution now works with rational supports
+	16. IDF for symbolic discrete random variables updated to
+		start the support at 0
+	17. Corrected likelihood function computation in Posterior
+	18. Fixed technique for finding area in Truncate
+	19. ChiRV now outputs rational numbers
+	20. Transform modified to handle transformations by 1/x and log(x)
+
+
+v0.3.0, 12 JAN 2015
+
+New Capabilities:
+	1. The Queue procedure computes the sojourn time distribution
+		for an M/M/s Queue for customer n, given k customers
+		initially in the queue.
+	2. Special MLE algorithms implemented for the Normal, Exponential,
+		Poisson and Weibull distributions
+	3. Thorough doc strings added for each applpy module
+	4. Cache option has been added for functional form conversion and
+		expected value procedure. If cache=True, APPLPy stores the
+		values in memory to be retrieve later if the function is
+		called again. This save significant CPU time on future
+		function calls
+	5. Doc Strings added for each distribution type
+	6. Behavior of +,-,*,/ set to allow random variables to interact
+		with floats and ints
+	7. == operator will now test for the equality of two random variables
+	8. Maximum and Minimum will now accept a variable number of arguments
+	9. Box-Muller Transformation method implemented to allow for more
+		efficient computation of Normal variates
+	10. Users can now specify method for variate generation (generally
+		inverse cdf or a numerical method)
+	11. X.latex() command added to generate the LaTeX code for a
+		random variable
+
+Fixed Bugs:
+	1. Maximum and Minimum are now working properly for piecewise
+		distributions. Boundary conditions caused to the procedures
+		to use the incorrect segments in the earlier
+		implementation
+	2. The gamma function is now loaded into the namespace in the
+		dist_rv module.
+	3. Error message added to Transform to indicate if the user has
+		specified an undefined transformation
+
+v0.2.1, 18 NOV 2014
+
+New Capabilities:
+	1. Pre-processing code has been added to the beginning
+		of several procedures. Errors will be raised
+		if a procedure receives bad input.
+	2. PlotDist has been improved to allow for more plotting
+		options. PlotDist is now capable of using different
+		colors and displaying multiple plots simultaneously
+	3. Discrete and continuous plots can now be displayed in
+		the same overlay
+	4. Improved display implemented for continuous random variables.
+		Displays large piecewise random variabls more cleanly
+	5. MLE and MOM now have options for numerical solving
+	6. Procedure added for computing the entropy of random variables
+
+Fixed Bugs:
+	1. Start-up script has been modified. The init_session()
+		commands for SymPy are entered manually. APPLPy
+		can now be imported in an interactive command
+		line session
+	2. Updates have been made to the way the APPLPy package is
+		structured. Importing APPLPy is now less memory
+		instensive (does not import all of SymPy, etc)
+	3. KSRV now runs properly ... arrays are no initialized
+		with 0 instead of None to avoid TypeErrors
+		when variables are summed
+	4. Minimum and Maximum procedures have been debugged for
+		discrete random variables. Old version had issues
+		recognizing floating point numbers in the support
+
+v0.2.0, 17 SEPTEMBER 2014
+
+New Capabilities:
+	1. Bayesian statistics module has been added. Capabilities
+		include:
+		a. Computing posterior distributions
+		b. Computing posterior predictive distributions
+		c. Computing Jeffreys Priors
+		d. Credible Sets
+	2. Functionality added for discrete random variables in
+		functional forms for the following procedures:
+		a. All procedures for changing functional form
+			(i.e. CDF to PDF)
+		b. All expected value procedures
+	3. New Random Variable types added (new distributions are
+		listed in the startup menu)
+	4. KS Test added to the statistics module
+
+Fixed Bugs:
+	1. PlotDist now supports univariate discrete random
+		variables
+	2. Random Variables no longer default to floating point
+		numbers when it produces output. Computation of
+		exact distributions is now possible
+	3. PlotDist now appears in the iPython Notebook when the
+		command %pylab inline is entered
+
+v0.1.2, 30 JULY 2014
+
+New Capabilities:
+	1. Capability to work with RV's with symbolic supports was
+	added.
+
+v0.1.1, 29 JULY 2014
+
+Fixed Bugs:
+	1. Convolution/Product/MaximumIID procedures have been updated
+	so that they now function with all distributions. In the
+	initial release, they only worked with lifetime distributions.
+
+	2. Expected value procedures were modified to output
+	simplified expressions
+
+	3. init.py file modified so that all dependencies are
+	automatically imported
+
+	4. Plotting now takes place through the sympy plotting front-
+	end. The PlotDist procedure is now capable of plotting all
+	functions
+
+v0.1.0, 23 JULY 2014 -- Initial Release
